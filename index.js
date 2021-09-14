@@ -3,7 +3,7 @@ const taskContainer = document.querySelector(".task_container");
 
 const globalStore = [];
 
-  
+
 
 
 const generateNewCard = (taskData) => ` <div class="col-md-6 col-lg-4" id=${taskData.id}>
@@ -11,7 +11,7 @@ const generateNewCard = (taskData) => ` <div class="col-md-6 col-lg-4" id=${task
   <div class="card-header d-flex justify-content-end gap-2 ">
     <button type="button" class="btn btn-success"><i class="fas fa-pencil-ruler"></i></button>
     <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-  </div>
+  </div> 
   <img
     src=${taskData.imageUrl}
     class="card-img-top" alt="...">
@@ -27,23 +27,23 @@ const generateNewCard = (taskData) => ` <div class="col-md-6 col-lg-4" id=${task
 </div>
 `;
 
-const localInitialCardData = () => {
 
-const getCardData = localStorage.getItem("tasky");
+const loadInitialCardData = () => {
 
-const {cards} = JSON.parse(getCardData);
+  const getCardData = localStorage.getItem("tasky");
 
-cards.map(element => {
-  
-});((cardObject) => {
-  taskContainer.insertAdjacentHTML("beforeend", generateNewCard(cardObject));
+  const { cards } = JSON.parse(getCardData);
 
-  globalStore.push(cardObject);
-})
+  cards.map((cardObject) => {
+    
+    taskContainer.insertAdjacentHTML("beforeend", generateNewCard(cardObject));
 
+    globalStore.push(cardObject); 
+  })
 
 };
- 
+
+
 
 
 const saveChanges = () => {
@@ -58,10 +58,10 @@ const saveChanges = () => {
 
 
   taskContainer.insertAdjacentHTML("beforeend", generateNewCard(taskData));
-
   globalStore.push(taskData);
 
-  localStorage.setItem("tasky",JSON.stringify({cards:globalStore}));
+  localStorage.setItem("tasky", JSON.stringify({ cards: globalStore }));
+
 
 };
 

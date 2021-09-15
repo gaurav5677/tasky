@@ -26,11 +26,60 @@
   <title>Tasky</title>
 </head>
 
-<body>
+<body onload="loadInitialCardData()">
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add New Task</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="mb-3">
+            <label for="imageurl" class="form-label">Image Url</label>
+            <input type="url" class="form-control" id="imageurl" aria-describedby="Image Url"
+              placeholder="https://example.com/hello.jpg">
+
+          </div>
+          <div class="mb-3">
+            <label for="tasktitle" class="form-label">Task Title</label>
+            <input type="text" class="form-control" id="tasktitle" aria-describedby="Task title"
+              placeholder=" Example:  tress and sorting  ">
+
+          </div>
+
+          <div class="mb-3">
+            <label for="tasktype" class="form-label">Task Type</label>
+            <input type="text" class="form-control" id="tasktype" aria-describedby="Task title"
+              placeholder=" Example: Algorithm ">
+
+          </div>
+          <div class="mb-3">
+            <label for="taskdescription" class="form-label">Task Description</label>
+            <textarea rows="6" class="form-control" id="taskdescription" aria-describedby="Task title"
+              placeholder="Describe your task in detail"></textarea>
+
+          </div>
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="saveChanges()" data-bs-dismiss="modal">Save
+            changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!--Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand  fw-bold" href="#">Tasky</a>
+      <a class="navbar-brand  fw-bold text-primary" href="#">Tasky</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -41,7 +90,7 @@
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
         </ul>
-        <button type="button" class="btn btn-primary">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
           <i class="fas fa-plus-square"></i> Add New</button>
       </div>
     </div>
@@ -61,40 +110,9 @@
     </div>
     <!-- cards -->
     <section>
-      <div class="row">
-        <div class="col-md-6 col-lg-5">
-
-          <div class="card text-center">
-            <div class="card-header d-flex justify-content-end gap-2">
-              <button type="button" class="btn btn-outline-success"><i class="fas fa-pencil-ruler"></i></button>
-              <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
-            </div>
-            <img src="https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-            <div class="card-footer  ">
-              <button type="button" class="btn btn-primary float-end">Open task</button>
-            </div>
-          </div>
-
-
-        </div>
-
+      <div class="row task__container">
       </div>
-
     </section>
-
-
-
-
-
-
-
-
-
   </div>
 
 
@@ -113,6 +131,9 @@
     crossorigin="anonymous"></script>
 
 
+
+  <!-- our JavaScript -->
+  <script src="index.js"></script>
 </body>
 
 </html>

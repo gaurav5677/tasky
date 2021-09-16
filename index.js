@@ -8,8 +8,10 @@ const generateNewCard = (taskData) => ` <div class="col-md-6 col-lg-5"  id=${tas
 
 <div class="card text-center">
   <div class="card-header d-flex justify-content-end gap-2">
-    <button type="button" class="btn btn-outline-success"><i class="fas fa-pencil-ruler"></i></button>
-    <button type="button" class="btn btn-outline-danger"  id=${taskData.id} onclick="deleteCard.apply(this, arguments)"><i class="fas fa-trash" id=${taskData.id} onclick="deleteCard.apply(this, arguments")></i></button>
+    <button type="button" id=${taskData.id}  class="btn btn-outline-success" onclick="editCard.apply(this, arguments)"><i class="fas fa-pencil-ruler" id=${taskData.id} onclick="editCard.apply(this, arguments)" ></i>
+    </button> 
+    <button type="button" id=${taskData.id}  class="btn btn-outline-danger"  onclick="deleteCard.apply(this, arguments)"><i class="fas fa-trash" id=${taskData.id} onclick="deleteCard.apply(this, arguments)"></i>
+    </button>
   </div> 
   <img
     src="${taskData.imgaeUrl}"
@@ -34,7 +36,7 @@ const loadInitialCardData = () => {
 
   const getCardData = localStorage.getItem("tasky");
 
-  const {cards} = JSON.parse(getCardData); 
+  const { cards } = JSON.parse(getCardData);
 
   cards.map((cardObject) => {
 
@@ -96,6 +98,35 @@ const deleteCard = (event) => {
 };
 
 
+
+const editCard = (event) => {
+
+  event = window.event;
+
+  const targetID = event.target.id;
+
+  const tagname = event.target.tagName;
+
+  let parentElement;
+  if (tagname === "BUTTON") {
+    parentElement = event.target.parentNode.parentNode;
+  } else {
+    parentElement = event.target.parentNode.parentNode.parentNode;
+  }
+
+  let taskTitle = parentElement.childNodes[5].childNodes[1];
+  let taskDescription = parentElement.childNodes[5].childNodes[3];
+  let taskType = parentElement.childNodes[5].childNodes[5];
+  let submitButton = parentElement.childNodes[7].childNodes[1];
+
+
+  taskTitle.setAttribute("contenteditable", "true");
+  taskDescription.setAttribute("contenteditable", "true");
+  taskType.setAttribute("contenteditable", "true");
+  submitButton.innerHTML = "Save Changes"; 
+
+
+};
 
 
 

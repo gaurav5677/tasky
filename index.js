@@ -1,7 +1,7 @@
 const taskContainer = document.querySelector(".task__container");
 
 
-const globalStore = []
+let globalStore = []
 
 
 const generateNewCard = (taskData) => ` <div class="col-md-6 col-lg-5"  id=${taskData.id}>
@@ -9,8 +9,8 @@ const generateNewCard = (taskData) => ` <div class="col-md-6 col-lg-5"  id=${tas
 <div class="card text-center">
   <div class="card-header d-flex justify-content-end gap-2">
     <button type="button" class="btn btn-outline-success"><i class="fas fa-pencil-ruler"></i></button>
-    <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
-  </div>
+    <button type="button" class="btn btn-outline-danger"  id=${taskData.id} onclick="deleteCard.apply(this, arguments)"><i class="fas fa-trash" id=${taskData.id} onclick="deleteCard.apply(this, arguments")></i></button>
+  </div> 
   <img
     src="${taskData.imgaeUrl}"
     class="card-img-top" alt="..."
@@ -34,7 +34,7 @@ const loadInitialCardData = () => {
 
   const getCardData = localStorage.getItem("tasky");
 
-  const { cards } = JSON.parse(getCardData);
+  const {cards} = JSON.parse(getCardData); 
 
   cards.map((cardObject) => {
 
@@ -51,7 +51,7 @@ const loadInitialCardData = () => {
 
 const saveChanges = () => {
   const taskData = {
-    id: ` ${Date.now()}`,
+    id: `${Date.now()}`,
     imgaeUrl: document.getElementById("imageurl").value,
     taskTitle: document.getElementById("tasktitle").value,
     taskType: document.getElementById("tasktype").value,
@@ -69,9 +69,31 @@ const saveChanges = () => {
 
   localStorage.setItem("tasky", JSON.stringify({ cards: globalStore }));
 
+
 };
 
 
+const deleteCard = (event) => {
+  event = window.event;
+
+  const targetID = event.target.id;
+
+  const tagname = event.target.tagName;
+
+  globalStore = globalStore.filter((cardObject) => cardObject.id !== targetID);
+
+  localStorage.setItem("tasky", JSON.stringify({ cards: globalStore }));
+
+  if (tagname === "BUTTON") {
+    return taskContainer.removeChild(event.target.parentNode.parentNode.parentNode);
+  } else {
+    return taskContainer.removeChild(event.target.parentNode.parentNode.parentNode.parentNode);
+  }
+
+
+
+
+};
 
 
 
